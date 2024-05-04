@@ -7,15 +7,20 @@ import { MatInputModule } from '@angular/material/input';
 @Component({
   selector: 'category-form',
   standalone: true,
-  imports: [ ReactiveFormsModule, MatButtonModule, MatCardModule, MatInputModule],
+  imports: [
+    ReactiveFormsModule,
+    MatButtonModule,
+    MatCardModule,
+    MatInputModule,
+  ],
   templateUrl: './form.component.html',
-  styles: ``
+  styles: ``,
 })
 export class CategoryFormComponent {
   constructor(private fb: FormBuilder) {}
   categoryForm = this.fb.group({
     id: [null],
     name: ['', Validators.required],
-    description: ['', Validators.required]
-  })
+    description: ['', Validators.required],
+  });
 }

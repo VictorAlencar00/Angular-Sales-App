@@ -11,33 +11,32 @@ import { map, shareReplay } from 'rxjs/operators';
 import { RouterOutlet } from '@angular/router';
 
 import { MenuComponent } from '../menu/menu.component';
-import { CategoriesComponent } from "../categories/categories.component";
-
+import { CategoriesComponent } from '../categories/categories.component';
 
 @Component({
-    selector: 'app-home',
-    templateUrl: './home.component.html',
-    styleUrl: './home.component.css',
-    standalone: true,
-    imports: [
-        MenuComponent,
-        MatToolbarModule,
-        MatButtonModule,
-        MatSidenavModule,
-        MatListModule,
-        MatIconModule,
-        AsyncPipe,
-        CategoriesComponent,
-        RouterOutlet
-    ]
+  selector: 'app-home',
+  templateUrl: './home.component.html',
+  styleUrl: './home.component.css',
+  standalone: true,
+  imports: [
+    MenuComponent,
+    MatToolbarModule,
+    MatButtonModule,
+    MatSidenavModule,
+    MatListModule,
+    MatIconModule,
+    AsyncPipe,
+    CategoriesComponent,
+    RouterOutlet,
+  ],
 })
 export class HomeComponent {
-
   private breakpointObserver = inject(BreakpointObserver);
 
-  isHandset$: Observable<boolean> = this.breakpointObserver.observe(Breakpoints.Handset)
+  isHandset$: Observable<boolean> = this.breakpointObserver
+    .observe(Breakpoints.Handset)
     .pipe(
-      map(result => result.matches),
-      shareReplay()
+      map((result) => result.matches),
+      shareReplay(),
     );
 }
