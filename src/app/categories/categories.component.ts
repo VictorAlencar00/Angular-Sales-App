@@ -9,6 +9,7 @@ import { MatSortModule, MatSort } from '@angular/material/sort';
 import { MatCardModule } from '@angular/material/card';
 import { lastValueFrom } from 'rxjs';
 import { MatButton } from '@angular/material/button';
+import { MatIcon } from '@angular/material/icon';
 
 import { CategoriesDataSource, CategoriesItem } from './categories-datasource';
 import { Category } from './category.dto';
@@ -31,6 +32,7 @@ import { CategoryFormComponent } from './form/form.component';
     MatCardModule,
     CategoryFormComponent,
     MatButton,
+    MatIcon,
   ],
 })
 export class CategoriesComponent implements AfterViewInit {
@@ -48,11 +50,6 @@ export class CategoriesComponent implements AfterViewInit {
 
   constructor(private categoryService: CategoryService) {}
 
-  onEditCategoryClick(category: Category) {
-    this.category = category;
-    this.showForm = true;
-  }
-
   ngAfterViewInit(): void {
     this.loadCategories();
   }
@@ -69,14 +66,26 @@ export class CategoriesComponent implements AfterViewInit {
     this.showForm = true;
   }
 
+  async onSave(category: Category) {
+    const saved = lastValueFrom(this.categoryService.save(category));
+    console.log('Saved', saved);
+    this.hideCategoryForm();
+  }
+
   hideCategoryForm() {
     this.showForm = false;
     this.loadCategories();
   }
 
-  async onSave(category: Category) {
-    const saved = lastValueFrom(this.categoryService.save(category));
-    console.log('Saved', saved);
-    this.hideCategoryForm();
+  onEditCategoryClick(category: Category) {
+    this.category = category;
+    this.showForm = true;
+  }
+
+  async onDeleteCategoryClick(category: Category) {
+    if (confirm(`Deletar ${category.name} com id ${category.id} ?`)) {
+      await lastValueFrom(this.categoryService.delete(category.id));
+      this.loadCategories();
+    }
   }
 }
