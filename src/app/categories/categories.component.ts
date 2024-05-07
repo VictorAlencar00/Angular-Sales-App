@@ -2,7 +2,7 @@ import { AfterViewInit, Component, ViewChild } from '@angular/core';
 import {
   MatTableModule,
   MatTable,
-  MatTableDataSource
+  MatTableDataSource,
 } from '@angular/material/table';
 import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
 import { MatSortModule, MatSort } from '@angular/material/sort';
@@ -30,7 +30,7 @@ import { CategoryFormComponent } from './form/form.component';
     MatSortModule,
     MatCardModule,
     CategoryFormComponent,
-    MatButton
+    MatButton,
   ],
 })
 export class CategoriesComponent implements AfterViewInit {
@@ -44,11 +44,14 @@ export class CategoriesComponent implements AfterViewInit {
 
   showForm: boolean = false;
 
-  onEditCategoryClick(category: Category) {
-    console.log('edit category', category)
-  }
+  category!: Category;
 
   constructor(private categoryService: CategoryService) {}
+
+  onEditCategoryClick(category: Category) {
+    this.category = category;
+    this.showForm = true;
+  }
 
   ngAfterViewInit(): void {
     this.loadCategories();
@@ -67,13 +70,13 @@ export class CategoriesComponent implements AfterViewInit {
   }
 
   hideCategoryForm() {
-    this.showForm = false
-    this.loadCategories()
+    this.showForm = false;
+    this.loadCategories();
   }
 
   async onSave(category: Category) {
-    const saved = lastValueFrom(this.categoryService.save(category))
-    console.log('Saved', saved)
-    this.hideCategoryForm()
-    }
+    const saved = lastValueFrom(this.categoryService.save(category));
+    console.log('Saved', saved);
+    this.hideCategoryForm();
+  }
 }

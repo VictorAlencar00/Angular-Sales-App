@@ -3,6 +3,7 @@
     <category-form
       (back)="hideCategoryForm()"
       (save)="onSave($event)"
+      [category]="category"
     ></category-form>
   } @else {
     <mat-card-header>

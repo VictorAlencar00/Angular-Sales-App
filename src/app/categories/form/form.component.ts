@@ -1,10 +1,15 @@
-import { Component, EventEmitter, Output } from '@angular/core';
+import {
+  Component,
+  EventEmitter,
+  Output,
+  Input,
+  AfterViewInit,
+} from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { MatInputModule } from '@angular/material/input';
-
-import { Category } from '../category.dto'
+import { Category } from '../category.dto';
 
 @Component({
   selector: 'category-form',
@@ -18,8 +23,11 @@ import { Category } from '../category.dto'
   templateUrl: './form.component.html',
   styles: ``,
 })
-export class CategoryFormComponent{
+export class CategoryFormComponent implements AfterViewInit {
   constructor(private fb: FormBuilder) {}
+  ngAfterViewInit(): void {
+    throw new Error('Method not implemented.');
+  }
   ngOnInit(): void {
     throw new Error('Method not implemented.');
   }
@@ -32,13 +40,17 @@ export class CategoryFormComponent{
   @Output() save = new EventEmitter<Category>();
 
   onSubmit() {
-    this.save.emit(this.categoryForm.value as Category)
+    this.save.emit(this.categoryForm.value as Category);
   }
 
   @Output() back = new EventEmitter();
 
   onBack() {
-    this.back.emit()
+    this.back.emit();
   }
 
+  @Input()
+  set category(category: Category) {
+    this.categoryForm.setValue(category);
+  }
 }
