@@ -15,6 +15,7 @@ import { CategoriesDataSource, CategoriesItem } from './categories-datasource';
 import { Category } from './category.dto';
 import { CategoryService } from './category.service';
 import { CategoryFormComponent } from './form/form.component';
+import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
 
 @Component({
   selector: 'app-categories',
@@ -33,6 +34,7 @@ import { CategoryFormComponent } from './form/form.component';
     CategoryFormComponent,
     MatButton,
     MatIcon,
+    LoadingBarComponent,
   ],
 })
 export class CategoriesComponent implements AfterViewInit {
@@ -45,6 +47,7 @@ export class CategoriesComponent implements AfterViewInit {
   displayedColumns = ['id', 'name', 'description', 'actions'];
 
   showForm: boolean = false;
+  showLoading: boolean = false;
 
   category!: Category;
 
@@ -55,11 +58,13 @@ export class CategoriesComponent implements AfterViewInit {
   }
 
   async loadCategories(): Promise<void> {
+    this.showLoading = true;
     const categories = await lastValueFrom(this.categoryService.getAll());
     this.dataSource = new MatTableDataSource(categories);
     this.table.dataSource = this.dataSource;
     this.dataSource.sort = this.sort;
     this.dataSource.paginator = this.paginator;
+    this.showLoading = false;
   }
 
   onNewCategoryClick() {
@@ -70,6 +75,7 @@ export class CategoriesComponent implements AfterViewInit {
     const saved = lastValueFrom(this.categoryService.save(category));
     console.log('Saved', saved);
     this.hideCategoryForm();
+    this.loadCategories();
   }
 
   hideCategoryForm() {
@@ -83,8 +89,11 @@ export class CategoriesComponent implements AfterViewInit {
   }
 
   async onDeleteCategoryClick(category: Category) {
-    if (confirm(`Deletar ${category.name} com id ${category.id} ?`)) {
+    console.log('delete category', category);
+    if (confirm(`Delete "${category.name}" with id ${category.id} ?`)) {
+      this.showLoading = true;
       await lastValueFrom(this.categoryService.delete(category.id));
+      this.showLoading = false;
       this.loadCategories();
     }
   }
