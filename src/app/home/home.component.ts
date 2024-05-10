@@ -12,6 +12,7 @@ import { RouterOutlet } from '@angular/router';
 
 import { MenuComponent } from '../menu/menu.component';
 import { CategoriesComponent } from '../categories/categories.component';
+import { MaterialModule } from '../material.module';
 
 @Component({
   selector: 'app-home',
@@ -20,11 +21,7 @@ import { CategoriesComponent } from '../categories/categories.component';
   standalone: true,
   imports: [
     MenuComponent,
-    MatToolbarModule,
-    MatButtonModule,
-    MatSidenavModule,
-    MatListModule,
-    MatIconModule,
+    MaterialModule,
     AsyncPipe,
     CategoriesComponent,
     RouterOutlet,

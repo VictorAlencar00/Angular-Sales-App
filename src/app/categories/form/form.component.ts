@@ -6,20 +6,13 @@ import {
   AfterViewInit,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
-import { MatInputModule } from '@angular/material/input';
+import { MaterialModule } from '../../material.module';
 import { Category } from '../category.dto';
 
 @Component({
   selector: 'category-form',
   standalone: true,
-  imports: [
-    ReactiveFormsModule,
-    MatButtonModule,
-    MatCardModule,
-    MatInputModule,
-  ],
+  imports: [ReactiveFormsModule, MaterialModule],
   templateUrl: './form.component.html',
   styles: ``,
 })

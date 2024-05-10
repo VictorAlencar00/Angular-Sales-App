@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { MatListModule } from '@angular/material/list';
+import { MaterialModule } from '../material.module';
 
 interface MenuItem {
   path: string;
@@ -9,7 +9,7 @@ interface MenuItem {
 @Component({
   selector: 'app-menu',
   standalone: true,
-  imports: [MatListModule],
+  imports: [MaterialModule],
   template: `
     @for (item of menuItems; track item.path) {
       <a mat-list-item [href]="item.path">{{ item.label }}</a>

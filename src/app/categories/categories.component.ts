@@ -1,21 +1,15 @@
 import { AfterViewInit, Component, ViewChild } from '@angular/core';
-import {
-  MatTableModule,
-  MatTable,
-  MatTableDataSource,
-} from '@angular/material/table';
-import { MatPaginatorModule, MatPaginator } from '@angular/material/paginator';
-import { MatSortModule, MatSort } from '@angular/material/sort';
-import { MatCardModule } from '@angular/material/card';
 import { lastValueFrom } from 'rxjs';
-import { MatButton } from '@angular/material/button';
-import { MatIcon } from '@angular/material/icon';
+import { MaterialModule } from '../material.module';
 
-import { CategoriesDataSource, CategoriesItem } from './categories-datasource';
+import { CategoriesItem } from './categories-datasource';
 import { Category } from './category.dto';
 import { CategoryService } from './category.service';
 import { CategoryFormComponent } from './form/form.component';
 import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
+import { MatTable, MatTableDataSource } from '@angular/material/table';
+import { MatPaginator } from '@angular/material/paginator';
+import { MatSort } from '@angular/material/sort';
 
 @Component({
   selector: 'app-categories',
@@ -26,16 +20,7 @@ import { LoadingBarComponent } from '../loading-bar/loading-bar.component';
     }
   `,
   standalone: true,
-  imports: [
-    MatTableModule,
-    MatPaginatorModule,
-    MatSortModule,
-    MatCardModule,
-    CategoryFormComponent,
-    MatButton,
-    MatIcon,
-    LoadingBarComponent,
-  ],
+  imports: [MaterialModule, CategoryFormComponent, LoadingBarComponent],
 })
 export class CategoriesComponent implements AfterViewInit {
   @ViewChild(MatPaginator) paginator!: MatPaginator;

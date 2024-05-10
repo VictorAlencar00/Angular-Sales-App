@@ -1,10 +1,10 @@
 import { Component, Input, input } from '@angular/core';
-import { MatProgressBar } from '@angular/material/progress-bar';
+import { MaterialModule } from '../material.module';
 
 @Component({
   selector: 'loading-bar',
   standalone: true,
-  imports: [MatProgressBar],
+  imports: [MaterialModule],
   template: `
     @if (visible) {
       <mat-progress-bar color="primary" mode="indeterminate">
