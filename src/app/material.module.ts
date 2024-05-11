@@ -13,6 +13,11 @@ import {
   MatProgressBar,
   MatProgressBarModule,
 } from '@angular/material/progress-bar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatList, MatListItem, MatNavList } from '@angular/material/list';
+import { MatMenuModule } from '@angular/material/menu';
+import { MatGridListModule } from '@angular/material/grid-list';
 
 @NgModule({
   declarations: [],
@@ -32,8 +37,14 @@ import {
     MatPaginator,
     MatSort,
     MatTable,
-    MatProgressBar,
     MatProgressBarModule,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatNavList,
+    MatProgressBar,
+    MatMenuModule,
+    MatGridListModule,
+    MatListItem,
   ],
   exports: [
     MatTableModule,
@@ -50,7 +61,13 @@ import {
     MatPaginator,
     MatSort,
     MatTable,
+    MatSidenavModule,
+    MatToolbarModule,
+    MatNavList,
     MatProgressBar,
+    MatMenuModule,
+    MatGridListModule,
+    MatListItem,
   ],
 })
 export class MaterialModule {}
