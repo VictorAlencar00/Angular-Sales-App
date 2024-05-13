@@ -1,10 +1,4 @@
-import {
-  Component,
-  EventEmitter,
-  Output,
-  Input,
-  AfterViewInit,
-} from '@angular/core';
+import { Component, EventEmitter, Output, Input } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { MaterialModule } from '../../material.module';
 import { Category } from '../category.dto';
@@ -16,14 +10,9 @@ import { Category } from '../category.dto';
   templateUrl: './form.component.html',
   styles: ``,
 })
-export class CategoryFormComponent implements AfterViewInit {
+export class CategoryFormComponent {
   constructor(private fb: FormBuilder) {}
-  ngAfterViewInit(): void {
-    throw new Error('Method not implemented.');
-  }
-  ngOnInit(): void {
-    throw new Error('Method not implemented.');
-  }
+
   categoryForm = this.fb.group({
     id: [null],
     name: ['', [Validators.required, Validators.minLength(3)]],
